@@ -11,4 +11,7 @@ with open("C:/Musfique's Folder/Python/DSA-2-Lab/Online_Class_1/sparseGraph.txt"
     # 3. Map the int function to each item in the list -> (an iterator for 5 and 10)
     n, m = map(int, f.readline().split())
 
-    print(n,m)
+    # print(n,m)
+
+    adjacency_matrix = {i:[] for i in range(n)}
+    print(adjacency_matrix)
