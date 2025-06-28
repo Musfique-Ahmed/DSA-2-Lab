@@ -90,7 +90,7 @@ def showShortestPath(graph, parent, root):
     plt.title(f"Shortest Path Tree from Node {root}")
     plt.show()
     
-graph, adj = graphInput('graph.txt')
+graph, adj = graphInput("C:\Musfique's Folder\Python\DSA-2-Lab\Final Prac\sparseGraph.txt")
 show_graph(graph, title="Sparse Graph Visualization")
 #dist, parent = dijkstra(adj, 0)
 dist, parent = bellmanFord(adj, 0)
