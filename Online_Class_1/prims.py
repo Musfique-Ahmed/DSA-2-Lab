@@ -1,24 +1,27 @@
 import heapq
-import networkx as nx
-import matplotlib.pyplot as plt
+# import networkx as nx
+# import matplotlib.pyplot as plt
 
 def primsAlgorithm(adjlist, root):
     parentArray = [-1]  * len(adjacency_list)
     key = [float('inf')] * len(adjacency_list)
-    treeVertex = [False] * len(adjacency_list)
+    treeVertex = [False] * len(adjacency_list) #visited kina T-visited, F-notvisited
 
     key[root] = 0
 
-    minHeap = [(key[root],root)] #(key, vertex)
+    minHeap = [(key[root],root)] #(key, vertex)(0, 0)
 
     while minHeap:
         minkey , u = heapq.heappop(minHeap)
+
+        if treeVertex[u]: continue #if treevertex[u] == True: continue
+
         treeVertex[u] = True
 
-        for v, w in adjacency_list[u]:
-            if not treeVertex[v] and key[v] > w:
-                key[v] = w
-                parentArray[v] = u
+        for v, w in adjacency_list[u]:# 4: [(3,21), (2,12), (),()]
+            if not treeVertex[v] and key[v] > w: # notun man jodi choto hoye
+                key[v] = w # new man update kore dibo
+                parentArray[v] = u # parent update
                 heapq.heappush(minHeap, (key[v], v))
 
     return key, parentArray
@@ -28,7 +31,7 @@ def primsAlgorithm(adjlist, root):
 
 # n = no of vertex, m = no of edge (50034)
 
-with open("C:/Musfique's Folder/Python/DSA-2-Lab/Online_Class_1/sparseGraph.txt", "r") as f:
+with open("C:\Musfique's Folder\Python\DSA-2-Lab\Online_Class_1\sparseGraph.txt", "r") as f:
     # hi = f.readline()
     # print(repr(hi))
     # print(f.readline().split())
@@ -39,7 +42,7 @@ with open("C:/Musfique's Folder/Python/DSA-2-Lab/Online_Class_1/sparseGraph.txt"
 
     # print(n,m)
 
-    adjacency_list = {i:[] for i in range(n)}
+    adjacency_list = {i:[] for i in range(n)} #dict creat
     # print(adjacency_list)
 
     for _ in range(m):
@@ -49,19 +52,20 @@ with open("C:/Musfique's Folder/Python/DSA-2-Lab/Online_Class_1/sparseGraph.txt"
 
     key, parent = primsAlgorithm(adjacency_list, 0)
     print(sum(key))
+    # print(parent)
 
     # print(len(adjacency_list))
 
 
 
 
-G = nx.Graph()
+# G = nx.Graph()
 
-for u in range(n):
-    if parent[u] != -1:
-        G.add_edge(parent[u], u, weight = key[u])
+# for u in range(n):
+#     if parent[u] != -1:
+#         G.add_edge(parent[u], u, weight = key[u])
 
-pos = nx.spring_layout(G)
-nx.draw(G, pos, with_labels = True, node_size = 10, node_color='lightblue', font_size=10)
-edge_labels = nx.get_edge_attributes(G, 'weight')
-plt.show()
+# pos = nx.spring_layout(G)
+# nx.draw(G, pos, with_labels = True, node_size = 10, node_color='lightblue', font_size=10)
+# edge_labels = nx.get_edge_attributes(G, 'weight')
+# plt.show()
